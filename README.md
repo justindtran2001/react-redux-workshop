@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# React Hooks & Redux — Expense Manager Workshop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A progressive 14-branch workshop that builds an Expense Manager app from scratch using React hooks and Redux. Each branch introduces a new concept with `TODO` comments marking the exercises.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 18+
+- Yarn
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+yarn install
+yarn dev        # Start Vite dev server (HMR)
+yarn build      # Typecheck + production build (run after every exercise)
+yarn lint       # ESLint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start on branch `01-useState` and work forward:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git checkout 01-useState
 ```
+
+Each branch is a checkpoint. Check out the next one before each exercise begins.
+
+## How to do each exercise
+
+1. **Check out the branch** — each one starts at a pre-exercise state with `TODO` comments
+2. **Search for `TODO:`** in `src/` — these are your implementation targets
+3. **Implement the exercise** — follow the prompt in each TODO comment
+4. **Run `yarn build`** — typecheck for correctness
+5. **Run `yarn dev`** — verify the result in the browser (Vite HMR)
+6. **Move to the next branch**
+
+Some branches carry solutions forward; others reset to a fresh starting state. When in doubt, diff the relevant files between branches to check.
+
+## Branch overview
+
+| Branch | Concept | Type |
+|--------|---------|------|
+| `01-useState` | `useState`, component props | Hands-on |
+| `02-useEffect` | `useEffect`, localStorage persistence | Hands-on |
+| `03-useRef` | `useRef`, debounced search | Hands-on |
+| `04-useMemo` | `useMemo`, memoized derived values | Hands-on |
+| `05-useCallback` | `useCallback`, `React.memo` | Hands-on |
+| `06-useReducer` | `useReducer`, form state consolidation | Hands-on |
+| `07-useContext` | `useContext`, prop-drilling elimination | Hands-on |
+| `08-expenses-in-context` | `useReducer` + `useContext` combined | Pre-built |
+| `09-custom-hooks` | Custom hooks, `useAppContext` guard | Pre-built |
+| `10-redux-expenses` | Vanilla Redux store setup | Pre-built |
+| `11-redux-filters` | Redux filters slice | Hands-on |
+| `12-redux-ui-async` | Async Redux, UI slice | Pre-built |
+| `13-rtk-refactor` | Redux Toolkit `createSlice` migration | Hands-on |
+| `14-final` | Complete RTK solution | Pre-built (reference) |
+
+## Structure
+
+The app lives entirely in `src/`:
+
+```
+src/
+  components/   — UI components (added as branches progress)
+  store/        — Redux store (from branch 10 onward)
+  types/        — TypeScript types
+  hooks/        — Custom hooks (from branch 09)
+  context/      — React context (branches 07–09)
+```
+
+## Key tools
+
+| Command | Purpose |
+|---------|---------|
+| `yarn dev` | Vite dev server with HMR |
+| `yarn build` | `tsc -b && vite build` — typecheck + bundle |
+| `yarn lint` | ESLint with React hooks plugin |
+
+No test runner is configured. `yarn build` is the only verification gate.
